@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
+import { useSanitizer } from '@/composables/useSanitizer'
+
+const { sanitizeUrl } = useSanitizer()
 
 const links = ref([
     {
@@ -24,7 +27,7 @@ const links = ref([
     <div class="page">
         <ul class="menu bg-base-200 rounded-box">
             <li v-for="link in links" :key="link.url">
-                <a :href="link.url">
+                <a :href="sanitizeUrl(link.url)">
                     {{ link.label }}
                 </a>
             </li>
